@@ -1,14 +1,14 @@
 import os
-import numpy as np
 import pickle
 
 
-def SimpleCalculator(args):
+def SimpleDisplay(args):
+    file_path = f"{args.save_dir}/total.pickle"
 
-    total = args.number1 + args.number2
-    with open(f"{args.save_dir}/total.pickle", "wb") as f:
-        pickle.dump(total, f)
+    with open(file_path, "rb") as f:
+        total = pickle.load(f)
 
+    print('total value ==== >', total)
 
 
 if __name__ == '__main__':
@@ -16,8 +16,6 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='Download.')
     parser.add_argument('--save_dir', default='data', type=str, help='data directory')
-    parser.add_argument('--number1', default=20, type=int, help='data directory')
-    parser.add_argument('--number2', default=50, type=int, help='data directory')
 
     args = parser.parse_args()
-    SimpleCalculator(args)
+    SimpleDisplay(args)
