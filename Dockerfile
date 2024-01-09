@@ -9,10 +9,11 @@ RUN mkdir -p $DATA_DIR
 RUN apt-get update && apt-get install -y git
 
 # Clone the repository
-RUN git clone {repository_url}
+ARG REPOSITORY_URL
+RUN git clone $REPOSITORY_URL
 
 # Set the working directory to the cloned repository
-WORKDIR /app/{repository_url.split("/")[-1]}
+WORKDIR /app/$(basename $REPOSITORY_URL .git)
 
 # Your additional commands if needed
 
